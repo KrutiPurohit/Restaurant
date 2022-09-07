@@ -1,0 +1,66 @@
+﻿@model BusinessObjects.OrderBO
+@{
+    ViewBag.Title = "Order";
+}
+
+@using (Html.BeginForm("Order", "Home", FormMethod.Post))
+{
+    <div class="container mt-5">
+
+        <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+            <h1 class="display-4">Order Details</h1>
+        </div>
+        <div class="col-md-8 offset-2">
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.OrderDate, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.OrderDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model=>Model.OrderDate,null,new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.RestaurantID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.RestaurantID, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        @Html.LabelFor(Model => Model.MenuItemID, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.MenuItemID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.MenuItemID, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        @Html.LabelFor(Model => Model.ItemQuantiy, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.ItemQuantiy, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.ItemQuantiy, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        @Html.LabelFor(Model => Model.OrderAmount, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.OrderAmount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.OrderAmount, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-4 form-group">
+                        @Html.LabelFor(Model => Model.DiningTableID, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.DiningTableID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.DiningTableID, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+
+                    <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save">
+                        order
+                        now!
+                    </button>
+
+
+            </div>
+        </div>
+    }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessObjects;
+using BusinessLogic;
 
 namespace Restaurant.Web.Controllers
 {
@@ -12,19 +14,20 @@ namespace Restaurant.Web.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult Order()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Order(OrderBO orderBO)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                OrderBL orderBL = new OrderBL();
+                CustomBO customBO = orderBL.AddOrder(orderBO);
+                return RedirectToAction("Order");
+            }
+            return View(orderBO);
         }
     }
 }
