@@ -14,5 +14,9 @@ namespace BusinessLogic
         {
             return new DiningTableDAL().GetAllDiningTableLocations();
         }
+        public IEnumerable<SelectListItem> GetDiningTableLocations(int restaurantID)
+        {
+            return new DiningTableDAL().GetAllDiningTableLocations(restaurantID);
+        }
     }
 }

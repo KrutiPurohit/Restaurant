@@ -47,6 +47,17 @@ namespace Restaurant.Web.Controllers
             return Json(itemPrice, JsonRequestBehavior.AllowGet);
 
         }
-
+        [HttpPost]
+        public ActionResult GetMenuItems(string restaurantID)
+        {
+            IEnumerable<SelectListItem> menuItemNames = new MenuItemBL().GetMenuItemNames(int.Parse(restaurantID));
+            return Json(menuItemNames.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult GetDiningTableLocations(string restaurantID)
+        {
+            IEnumerable<SelectListItem> diningTableLocation = new DiningTableBL().GetDiningTableLocations(int.Parse(restaurantID));
+            return Json(diningTableLocation.ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

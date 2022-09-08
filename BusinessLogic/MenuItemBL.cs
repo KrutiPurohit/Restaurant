@@ -14,6 +14,10 @@ namespace BusinessLogic
         {
             return new MenuItemDAL().GetAllMenuItemNames();
         }
+        public IEnumerable<SelectListItem> GetMenuItemNames(int restaurantID)
+        {
+            return new MenuItemDAL().GetAllMenuItemNames(restaurantID);
+        }
         public double GetMenuITemPrice(int itemID)
         {
             return new MenuItemDAL().GetItemPrice(itemID);

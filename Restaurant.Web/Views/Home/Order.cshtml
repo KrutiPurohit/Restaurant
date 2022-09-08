@@ -1,24 +1,27 @@
 ﻿@model  BusinessObjects.OrderBO
-@using System.Web.WebPages
+
 @{
     ViewBag.Title = "Order";
 }
-<script src="~/Scripts/jquery-3.4.1.js"></script>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
 <script type="text/javascript" language="jscript">
     $(document).ready(function () {
-        $('#MenuItems').val("");
+        var restuarantID = $('#Resturants').val();
+        GetMenuItems(restuarantID);
+        GetDiningTableLocations(restuarantID);
         $('#MenuItems').change(function () {
             var itemID = $('#MenuItems').val();
             GetItemPrice(itemID);
         });
-        $('#itemQuantity').keypress(function () {
+        $('#itemQuantity').change(function () {
             CalculateTotal();
         });
         $('#Resturants').change(function () {
-            var itemID = $('#Resturants').val();
-           
+            var restuarantID = $('#Resturants').val();
+            GetMenuItems(restuarantID);
+            GetDiningTableLocations(restuarantID);
         });
+      
     });
     function CalculateTotal() {
         var itemPrice = $("#itemPrice").val();
@@ -46,19 +49,47 @@
 
         });
     }
-    function GetItemPrice(itemID) {
+    function GetMenuItems(restaurantID) {
         $.ajax({
-            async: true,
-            type: 'GET',
-            datatype: 'JSON',
-            contentType: 'application/json;charsetutf-8',
-            data: { itemID: itemID },
-            url: '/home/GetMenuItemPrice',
+            type: "post",
+            url: "/home/GetMenuItems",
+            data: { restaurantID: restaurantID },
+            datatype: "json",
+            traditional: true,
             success: function (data) {
-                $("#itemPrice").val(parseFloat(data).toFixed(2));
+                var menuItems = "<select id='MenuItems'>";
+                menuItems = menuItems + '<option value="">--Select--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    menuItems = menuItems + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                }
+                menuItems = menuItems + '</select>';
+                $('#MenuItems').html(menuItems);
             },
             error: function () {
-                alert('There is some problem to get menu item price');
+                alert('There is some problem to get menu items' + restaurantID);
+            }
+
+
+        });
+    }
+    function GetDiningTableLocations(restaurantID) {
+        $.ajax({
+            type: "post",
+            url: "/home/GetDiningTableLocations",
+            data: { restaurantID: restaurantID },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                var diningTable = "<select id='DiningTable'>";
+                diningTable = diningTable + '<option value="">--Select--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    diningTable = diningTable + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                }
+                diningTable = diningTable + '</select>';
+                $('#DiningTable').html(diningTable);
+            },
+            error: function () {
+                alert('There is some problem to get Dining Table Locations ' + restaurantID);
             }
 
 
