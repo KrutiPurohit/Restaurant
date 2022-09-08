@@ -16,7 +16,16 @@ namespace Restaurant.Web.Controllers
         }
         public ActionResult Order()
         {
-            return View();
+            RestaurantBL restaurantBL = new RestaurantBL();
+            DiningTableBL diningTableBL = new DiningTableBL();
+            MenuItemBL menuItemBL = new MenuItemBL();
+
+            OrderBO orderBO = new OrderBO();
+            orderBO.RestaurantNames = restaurantBL.GetRestaurantNames();
+            orderBO.DiningTableLocations = diningTableBL.GetDiningTableLocations();
+            orderBO.MenuItemNames = menuItemBL.GetMenuItemNames();
+
+            return View(orderBO);
         }
         [HttpPost]
         public ActionResult Order(OrderBO orderBO)
@@ -29,5 +38,15 @@ namespace Restaurant.Web.Controllers
             }
             return View(orderBO);
         }
+
+        [HttpGet]
+        public JsonResult GetMenuItemPrice(int itemID)
+        {
+            MenuItemBL menuItemBL = new MenuItemBL();
+            double itemPrice = menuItemBL.GetMenuITemPrice(itemID);
+            return Json(itemPrice, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }

@@ -1,7 +1,70 @@
-﻿@model BusinessObjects.OrderBO
+﻿@model  BusinessObjects.OrderBO
+@using System.Web.WebPages
 @{
     ViewBag.Title = "Order";
 }
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" language="jscript">
+    $(document).ready(function () {
+        $('#MenuItems').val("");
+        $('#MenuItems').change(function () {
+            var itemID = $('#MenuItems').val();
+            GetItemPrice(itemID);
+        });
+        $('#itemQuantity').keypress(function () {
+            CalculateTotal();
+        });
+        $('#Resturants').change(function () {
+            var itemID = $('#Resturants').val();
+           
+        });
+    });
+    function CalculateTotal() {
+        var itemPrice = $("#itemPrice").val();
+        var quantity = $("#itemQuantity").val();
+        var total = itemPrice * quantity;
+        $("#orderAmount").val(parseFloat(total).toFixed(2));
+
+    }
+
+    function GetItemPrice(itemID) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            datatype: 'JSON',
+            contentType: 'application/json;charsetutf-8',
+            data: { itemID: itemID },
+            url: '/home/GetMenuItemPrice',
+            success: function (data) {
+                $("#itemPrice").val(parseFloat(data).toFixed(2));
+            },
+            error: function () {
+                alert('There is some problem to get menu item price');
+            }
+
+
+        });
+    }
+    function GetItemPrice(itemID) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            datatype: 'JSON',
+            contentType: 'application/json;charsetutf-8',
+            data: { itemID: itemID },
+            url: '/home/GetMenuItemPrice',
+            success: function (data) {
+                $("#itemPrice").val(parseFloat(data).toFixed(2));
+            },
+            error: function () {
+                alert('There is some problem to get menu item price');
+            }
+
+
+        });
+    }
+</script>
 
 @using (Html.BeginForm("Order", "Home", FormMethod.Post))
 {
@@ -14,53 +77,54 @@
             <div class="row">
                 <div class="col-md-6 mb-3 form-group">
                     @Html.LabelFor(Model => Model.OrderDate, new { @class = "control-label" })
-                    @Html.TextBoxFor(Model => Model.OrderDate, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model=>Model.OrderDate,null,new { @class = "text-danger" })
+                    @Html.TextBoxFor(Model => Model.OrderDate, new { @id = "Date", @value = DateTime.Now.ToShortDateString(), @type = "date", @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.OrderDate, null, new { @class = "text-danger" })
                 </div>
 
                 <div class="col-md-6 mb-3 form-group">
                     @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
-                    @Html.TextBoxFor(Model => Model.RestaurantID, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.RestaurantID, null, new { @class = "text-danger" })
+                    @Html.DropDownList("Resturants", Model.RestaurantNames, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.RestaurantNames, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        @Html.LabelFor(Model => Model.MenuItemNames, new { @class = "control-label" })
+                        @Html.DropDownList("MenuItems", Model.MenuItemNames, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.MenuItemNames, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-6 form-group">
+                        @Html.LabelFor(Model => Model.DiningTableLocations, new { @class = "control-label" })
+                        @Html.DropDownList("DiningTable", Model.DiningTableLocations, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.DiningTableLocations, null, new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        @Html.LabelFor(Model => Model.MenuItemID, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.MenuItemID, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(Model => Model.MenuItemID, null, new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-md-4 form-group">
                         @Html.LabelFor(Model => Model.ItemQuantiy, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.ItemQuantiy, new { @class = "form-control" })
+                        @Html.TextBoxFor(Model => Model.ItemQuantiy, new { @class = "form-control" ,@id="itemQuantity"})
                         @Html.ValidationMessageFor(Model => Model.ItemQuantiy, null, new { @class = "text-danger" })
                     </div>
-
+                    <div class="col-md-4 form-group">
+                        <label for="itemPrice">Item Price</label>
+                        <input type="text" class="form-control" id="itemPrice" placeholder="Price" readonly>
+                    </div>
                     <div class="col-md-4 form-group">
                         @Html.LabelFor(Model => Model.OrderAmount, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.OrderAmount, new { @class = "form-control" })
+                        @Html.TextBoxFor(Model => Model.OrderAmount, new { @class = "form-control", @readonly = "readonly",@id="orderAmount" })
                         @Html.ValidationMessageFor(Model => Model.OrderAmount, null, new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-4 form-group">
-                        @Html.LabelFor(Model => Model.DiningTableID, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.DiningTableID, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(Model => Model.DiningTableID, null, new { @class = "text-danger" })
-                    </div>
-                </div>
-                </div>
-
-                    <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save">
-                        order
-                        now!
-                    </button>
+            <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save">
+                order
+                now!
+            </button>
 
 
-            </div>
         </div>
-    }
+    </div>
+}
