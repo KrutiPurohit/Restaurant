@@ -83,6 +83,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerDAL.cs" />
     <Compile Include="DiningTable.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>

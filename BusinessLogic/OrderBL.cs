@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects;
 using DataAccess;
+using System.Web.Mvc;
 
 namespace BusinessLogic
 {
@@ -13,6 +14,10 @@ namespace BusinessLogic
         public CustomBO AddOrder(OrderBO orderBO)
         {
             return new OrderDAL().AddOrder(orderBO);
+        }
+        public IEnumerable<SelectListItem> GetOrderIDs()
+        {
+            return new OrderDAL().GetAllOrderID();
         }
     }
 }

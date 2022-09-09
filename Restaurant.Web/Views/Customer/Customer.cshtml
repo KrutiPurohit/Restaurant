@@ -1,0 +1,61 @@
+﻿@model  BusinessObjects.CustomerBO
+
+@{
+    ViewBag.Title = "Customer";
+}
+
+<script type="text/javascript" language="jscript">
+    $(document).ready(function () {
+        $('#save').click(function () {
+            finalSubmit();
+        });
+    });
+    function finalSubmit() {
+        var RestaurantID = $('#Resturants').val();
+        $('#txtResturantID').val(RestaurantID);
+    }
+</script>
+@using (Html.BeginForm("Customer", "Customer", FormMethod.Post))
+{
+<div class="container mt-3">
+
+    <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+        <h1 class="display-4">Customer</h1>
+    </div>
+    <div class="col-md-6 offset-2 align-content-end mr-5 ">
+        <div class="row">
+            <div class="col-md-12 mb-3 form-group">
+                @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
+                @Html.TextBoxFor(Model => Model.RestaurantID, new { @type = "hidden", id = "txtResturantID" })
+                @Html.DropDownList("Resturants", Model.RestaurantNames, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.RestaurantNames, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(Model => Model.CustomerName, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.CustomerName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CustomerName, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(Model => Model.MobileNo, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.MobileNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.MobileNo, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+        <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save" id="save">
+            Add Customer
+        </button>
+    </div>
+   
+
+</div>
+}

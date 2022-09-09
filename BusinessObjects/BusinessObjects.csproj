@@ -66,8 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillsBO.cs" />
     <Compile Include="Common\CurrentDateAttribute.cs" />
     <Compile Include="CustomBO.cs" />
+    <Compile Include="CustomerBO.cs" />
     <Compile Include="OrderBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantBO.cs" />

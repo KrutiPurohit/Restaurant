@@ -8,31 +8,28 @@ using System.Web.Mvc;
 
 namespace DataAccess
 {
-    public class OrderDAL
+    public class CustomerDAL
     {
         RestaurantEntities restaurantEntities;
-        public OrderDAL()
+        public CustomerDAL()
         {
             restaurantEntities = new RestaurantEntities();
         }
-        public CustomBO AddOrder(OrderBO orderBO)
+        public CustomBO AddCustomer(CustomerBO customerBO)
         {
             CustomBO customBO = new CustomBO();
-                Order order = new Order()
-                {
-                     OrderDate = orderBO.OrderDate,
-                     RestaurantID=orderBO.RestaurantID,
-                     MenuItemID=orderBO.MenuItemID,
-                     ItemQuantity=orderBO.ItemQuantiy,
-                     OrderAmount=orderBO.OrderAmount,
-                     DiningTableID=orderBO.DiningTableID
-                };
-            restaurantEntities.Orders.Add(order);
+            Customer customer = new Customer()
+            {
+                CustomerID = customerBO.CustomerID,
+                RestaurantID = customerBO.RestaurantID,
+                CustomerName = customerBO.CustomerName,
+                MobileNo = customerBO.MobileNo
+            };
+            restaurantEntities.Customers.Add(customer);
             int returnValue = restaurantEntities.SaveChanges();
+
             if (returnValue > 0)
             {
-                DiningTableTrackDAL diningTableTrackDAL = new DiningTableTrackDAL();
-                diningTableTrackDAL.UpdateDiningTableStatus(orderBO.DiningTableID);
                 customBO.CustomMessage = "Data Successfully Added";
                 customBO.CustomMessageNumber = returnValue;
             }
@@ -43,18 +40,17 @@ namespace DataAccess
             }
             return customBO;
         }
-        public IEnumerable<SelectListItem> GetAllOrderID()
+        public IEnumerable<SelectListItem> GetAllCustomerNames()
         {
             IEnumerable<SelectListItem> selectListItems = new List<SelectListItem>();
-            selectListItems = (from obj in restaurantEntities.Orders
-                                where !(from bills in restaurantEntities.Bills select bills.OrderID).Contains (obj.OrderID)
+            selectListItems = (from obj in restaurantEntities.Customers
                                select new SelectListItem()
                                {
-                                   Text = obj.OrderID.ToString(),
-                                   Value = obj.OrderID.ToString(),
+                                   Text = obj.CustomerName,
+                                   Value = obj.CustomerID.ToString(),
                                    Selected = true
                                }).ToList();
             return selectListItems;
         }
     }
-}                                      
+}

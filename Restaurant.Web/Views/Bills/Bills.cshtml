@@ -1,0 +1,65 @@
+﻿@model  BusinessObjects.BillsBO
+
+@{
+    ViewBag.Title = "Bills";
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        alert("@ViewBag.Message");
+    };
+    </script>
+
+}
+
+<script type="text/javascript" language="jscript">
+    $(document).ready(function () {
+        $('#save').click(function () {
+            finalSubmit();
+        });
+    });
+    function finalSubmit() {
+        var orderID = $('#Orders').val();
+        $('#txtOrderID').val(orderID);
+
+        var customerID = $('#Customers').val();
+        $('#txtCustomerID').val(customerID);
+    }
+</script>
+
+@using (Html.BeginForm("Bills", "Bills", FormMethod.Post))
+{
+    <div class="container mt-3">
+
+        <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+            <h1 class="display-4">Bill</h1>
+        </div>
+        <div class="col-md-6 offset-2 align-content-end mr-5">
+            <div class="row">
+                <div class="col-md-12 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.OrderID, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.OrderID, new { @type = "hidden", id = "txtOrderID" })
+                    @Html.DropDownList("Orders", Model.OrderIDs, new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        @Html.LabelFor(Model => Model.CustomerID, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.CustomerID, new { @type = "hidden", id = "txtCustomerID" })
+                        @Html.DropDownList("Customers", Model.CustomerNames, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save" id="save">
+                Generate Bill
+            </button>
+        </div>
+
+    </div>
+
+
+}

@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            @Html.ActionLink("Home", "Index", "Home", htmlAttributes: new { @class = "nav-link" })
+                            @Html.ActionLink("Home", "Index", new { Controller = "Home" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -45,16 +45,16 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Order", "Order", "Home", htmlAttributes: new { @class = "nav-link" })
+                            @Html.ActionLink("Order", "Order", new { Controller = "Home" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="bill.html">Bill</a>
+                            @Html.ActionLink("Bill", "Bills", new { Controller = "Bills" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="bill.html">Dinig Table Track</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="bill.html">Customer</a>
+                            @Html.ActionLink("Customer", "Customer",new {Controller="Customer" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="bill.html">Report</a>
