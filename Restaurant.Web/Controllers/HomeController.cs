@@ -36,6 +36,14 @@ namespace Restaurant.Web.Controllers
                 CustomBO customBO = orderBL.AddOrder(orderBO);
                 return RedirectToAction("Order");
             }
+            RestaurantBL restaurantBL = new RestaurantBL();
+            DiningTableBL diningTableBL = new DiningTableBL();
+            MenuItemBL menuItemBL = new MenuItemBL();
+
+             orderBO = new OrderBO();
+            orderBO.RestaurantNames = restaurantBL.GetRestaurantNames();
+            orderBO.DiningTableLocations = diningTableBL.GetDiningTableLocations();
+            orderBO.MenuItemNames = menuItemBL.GetMenuItemNames();
             return View(orderBO);
         }
 
@@ -47,6 +55,16 @@ namespace Restaurant.Web.Controllers
             return Json(itemPrice, JsonRequestBehavior.AllowGet);
 
         }
+
+        [HttpGet]
+        public JsonResult GetDiningTableStatus(int diningTableID)
+        {
+            DiningTableTrackBL diningTableTrackBL = new DiningTableTrackBL();
+            string diningTableStatus = diningTableTrackBL.GetDiningTableStatus(diningTableID);
+            return Json(diningTableStatus, JsonRequestBehavior.AllowGet);
+
+        }
+
         [HttpPost]
         public ActionResult GetMenuItems(string restaurantID)
         {

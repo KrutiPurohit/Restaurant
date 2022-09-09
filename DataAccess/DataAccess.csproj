@@ -90,6 +90,7 @@
     <Compile Include="DiningTableTrack.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DiningTableTrackDAL.cs" />
     <Compile Include="MenuItemDAL.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>

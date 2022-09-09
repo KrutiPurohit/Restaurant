@@ -20,12 +20,7 @@ namespace BusinessObjects
         [Required(ErrorMessage ="Order Date is required")]
         public DateTime OrderDate { get; set; }
 
-        [Display(Name = "Restaurant ID")]
-        [Required(ErrorMessage = "Restaurant is required")]
         public int RestaurantID { get; set; }
-
-        [Display(Name = "Menu Item ID")]
-        [Required(ErrorMessage = "Menu ITem is required")]
         public int MenuItemID { get; set; }
 
        
@@ -36,12 +31,8 @@ namespace BusinessObjects
 
         [Display(Name = "Order Amount")]
         public float OrderAmount { get; set; }
-
-        [Display(Name = "Dining Table ID")]
-        [Required(ErrorMessage = "Dining Table is required")]
+     
         public int DiningTableID { get; set; }
-
-
 
         public IEnumerable<SelectListItem> RestaurantNames { get; set; }
         public IEnumerable<SelectListItem> DiningTableLocations { get; set; }

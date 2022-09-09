@@ -30,6 +30,8 @@ namespace DataAccess
             int returnValue = restaurantEntities.SaveChanges();
             if (returnValue > 0)
             {
+                DiningTableTrackDAL diningTableTrackDAL = new DiningTableTrackDAL();
+                diningTableTrackDAL.UpdateDiningTableStatus(orderBO.DiningTableID);
                 customBO.CustomMessage = "Data Successfully Added";
                 customBO.CustomMessageNumber = returnValue;
             }

@@ -21,8 +21,44 @@
             GetMenuItems(restuarantID);
             GetDiningTableLocations(restuarantID);
         });
-      
+        $('#DiningTable').change(function () {
+            var diningTableID = $('#DiningTable').val();
+            GetDiningTableStatus(diningTableID);
+        });
+        $('#save').click(function () {
+            finalSubmit();
+        });
     });
+    function GetDiningTableStatus(diningTableID) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            datatype: 'JSON',
+            contentType: 'application/json;charsetutf-8',
+            data: { diningTableID: diningTableID },
+            url: '/home/GetDiningTableStatus',
+            success: function (data) {
+                if (data == 'Occupied') {
+                    alert('Dining table is already Occupied.');
+                }
+            },
+            error: function () {
+                alert('There is some problem to get Dining Table Status');
+            }
+
+
+        });
+    }
+    function finalSubmit() {
+     
+        var RestaurantID = $('#Resturants').val();
+        var MenuItemID = $('#MenuItems').val();
+        var DiningTableID = $('#DiningTable').val();
+        $('#txtResturantID').val(RestaurantID);
+        $('#txtMenuItemID').val(MenuItemID);
+        $('#txtDiningTableID').val(DiningTableID);
+    }
+
     function CalculateTotal() {
         var itemPrice = $("#itemPrice").val();
         var quantity = $("#itemQuantity").val();
@@ -114,6 +150,7 @@
 
                 <div class="col-md-6 mb-3 form-group">
                     @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.RestaurantID, new { @type="hidden" ,id="txtResturantID"})
                     @Html.DropDownList("Resturants", Model.RestaurantNames, new { @class = "form-control" })
                     @Html.ValidationMessageFor(Model => Model.RestaurantNames, null, new { @class = "text-danger" })
                 </div>
@@ -122,11 +159,13 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         @Html.LabelFor(Model => Model.MenuItemNames, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.MenuItemID, new { @type = "hidden", id = "txtMenuItemID" })
                         @Html.DropDownList("MenuItems", Model.MenuItemNames, new { @class = "form-control" })
                         @Html.ValidationMessageFor(Model => Model.MenuItemNames, null, new { @class = "text-danger" })
                     </div>
                     <div class="col-6 form-group">
                         @Html.LabelFor(Model => Model.DiningTableLocations, new { @class = "control-label" })
+                        @Html.TextBoxFor(Model => Model.DiningTableID, new { @type = "hidden", id = "txtDiningTableID" })
                         @Html.DropDownList("DiningTable", Model.DiningTableLocations, new { @class = "form-control" })
                         @Html.ValidationMessageFor(Model => Model.DiningTableLocations, null, new { @class = "text-danger" })
                     </div>
@@ -150,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save">
+            <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save" id="save">
                 order
                 now!
             </button>
