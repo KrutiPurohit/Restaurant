@@ -34,6 +34,7 @@ namespace Restaurant.Web.Controllers
             {
                 OrderBL orderBL = new OrderBL();
                 CustomBO customBO = orderBL.AddOrder(orderBO);
+                TempData["AlertMessage"] = "Order placed Successfully ";
                 return RedirectToAction("Order");
             }
             RestaurantBL restaurantBL = new RestaurantBL();

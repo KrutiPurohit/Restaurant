@@ -10,5 +10,9 @@ namespace BusinessObjects
     {
         public int RestaurantID { get; set; }
         public string RestaurantName { get; set; }
+
+        public string Address { get; set; }
+
+        public string MobileNo { get; set; }
     }
 }

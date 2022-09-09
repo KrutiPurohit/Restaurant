@@ -26,6 +26,7 @@ namespace Restaurant.Web.Controllers
             {
                 CustomerBL customerBL = new CustomerBL();
                 CustomBO customBO = customerBL.AddCustomer(customerBO);
+                TempData["AlertMessage"] = "New Customer Added Successfully ";
                 return RedirectToAction("Customer");
             }
             RestaurantBL restaurantBL = new RestaurantBL();

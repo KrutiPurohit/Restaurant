@@ -135,66 +135,72 @@
 
 @using (Html.BeginForm("Order", "Home", FormMethod.Post))
 {
-    <div class="container mt-3">
+<div class="container mt-3">
 
-        <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
-            <h1 class="display-4">Order</h1>
-        </div>
-        <div class="col-md-8 offset-2">
-            <div class="row">
-                <div class="col-md-6 mb-3 form-group">
-                    @Html.LabelFor(Model => Model.OrderDate, new { @class = "control-label" })
-                    @Html.TextBoxFor(Model => Model.OrderDate, new { @id = "Date", @value = DateTime.Now.ToShortDateString(), @type = "date", @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.OrderDate, null, new { @class = "text-danger" })
-                </div>
-
-                <div class="col-md-6 mb-3 form-group">
-                    @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
-                    @Html.TextBoxFor(Model => Model.RestaurantID, new { @type="hidden" ,id="txtResturantID"})
-                    @Html.DropDownList("Resturants", Model.RestaurantNames, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.RestaurantNames, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        @Html.LabelFor(Model => Model.MenuItemNames, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.MenuItemID, new { @type = "hidden", id = "txtMenuItemID" })
-                        @Html.DropDownList("MenuItems", Model.MenuItemNames, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(Model => Model.MenuItemNames, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="col-6 form-group">
-                        @Html.LabelFor(Model => Model.DiningTableLocations, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.DiningTableID, new { @type = "hidden", id = "txtDiningTableID" })
-                        @Html.DropDownList("DiningTable", Model.DiningTableLocations, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(Model => Model.DiningTableLocations, null, new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        @Html.LabelFor(Model => Model.ItemQuantiy, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.ItemQuantiy, new { @class = "form-control" ,@id="itemQuantity"})
-                        @Html.ValidationMessageFor(Model => Model.ItemQuantiy, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="itemPrice">Item Price</label>
-                        <input type="text" class="form-control" id="itemPrice" placeholder="Price" readonly>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        @Html.LabelFor(Model => Model.OrderAmount, new { @class = "control-label" })
-                        @Html.TextBoxFor(Model => Model.OrderAmount, new { @class = "form-control", @readonly = "readonly",@id="orderAmount" })
-                        @Html.ValidationMessageFor(Model => Model.OrderAmount, null, new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save" id="save">
-                order
-                now!
-            </button>
-
-
-        </div>
+    <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+        <h1 class="display-4">Order</h1>
     </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Success...!</strong>  @TempData["AlertMessage"]
+        </div>
+    }
+    <div class="col-md-8 offset-2">
+        <div class="row">
+            <div class="col-md-6 mb-3 form-group">
+                @Html.LabelFor(Model => Model.OrderDate, new { @class = "control-label" })
+                @Html.TextBoxFor(Model => Model.OrderDate, new { @id = "Date", @value = DateTime.Now.ToShortDateString(), @type = "date", @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.OrderDate, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-6 mb-3 form-group">
+                @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
+                @Html.TextBoxFor(Model => Model.RestaurantID, new { @type = "hidden", id = "txtResturantID" })
+                @Html.DropDownList("Resturants", Model.RestaurantNames, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.RestaurantNames, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.LabelFor(Model => Model.MenuItemNames, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.MenuItemID, new { @type = "hidden", id = "txtMenuItemID" })
+                    @Html.DropDownList("MenuItems", Model.MenuItemNames, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.MenuItemNames, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-6 form-group">
+                    @Html.LabelFor(Model => Model.DiningTableLocations, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.DiningTableID, new { @type = "hidden", id = "txtDiningTableID" })
+                    @Html.DropDownList("DiningTable", Model.DiningTableLocations, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.DiningTableLocations, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(Model => Model.ItemQuantiy, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.ItemQuantiy, new { @class = "form-control", @id = "itemQuantity" })
+                    @Html.ValidationMessageFor(Model => Model.ItemQuantiy, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="itemPrice">Item Price</label>
+                    <input type="text" class="form-control" id="itemPrice" placeholder="Price" readonly>
+                </div>
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(Model => Model.OrderAmount, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.OrderAmount, new { @class = "form-control", @readonly = "readonly", @id = "orderAmount" })
+                    @Html.ValidationMessageFor(Model => Model.OrderAmount, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save" id="save">
+            order
+            now!
+        </button>
+
+
+    </div>
+</div>
 }

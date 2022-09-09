@@ -30,6 +30,7 @@ namespace Restaurant.Web.Controllers
             {
                 BillsBL billsBL  = new BillsBL();
                 billsBL.AddBill(billsBO);
+                TempData["AlertMessage"] = "Bill Generated Successfully of Order Number "+billsBO.OrderID;
                 return RedirectToAction("Bills");
             }
             OrderBL orderBL = new OrderBL();
@@ -38,7 +39,7 @@ namespace Restaurant.Web.Controllers
             billsBO = new BillsBO();
             billsBO.CustomerNames = customerBL.GetCustomerNames();
             billsBO.OrderIDs = orderBL.GetOrderIDs();
-            ViewBag.Message ="Bills Generated Successfully";
+            
             return View(billsBO);
         }
     }
