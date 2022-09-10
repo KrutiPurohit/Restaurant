@@ -25,7 +25,7 @@ namespace BusinessLogic
         {
             List<CuisineBO> cuisionBOs = new List<CuisineBO>();
 
-            string sqlQuery = "SELECT * FROM Restaurant.Cuisine";
+            string sqlQuery = "SELECT CS.CuisineID,CS.RestaurantID,CS.CuisineName,RS.RestaurantName FROM Restaurant.Cuisine AS CS INNER JOIN Restaurant.Restaurant AS RS ON CS.RestaurantID=RS.RestaurantID";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
@@ -40,6 +40,7 @@ namespace BusinessLogic
                            {
                                CuisineID = Convert.ToInt32(dataRow["CuisineID"]),
                                RestaurantID = Convert.ToInt32(dataRow["RestaurantID"]),
+                               RestaurantName = Convert.ToString(dataRow["RestaurantName"]),
                                CuisineName = Convert.ToString(dataRow["CuisineName"])
                            }).ToList();           
             return cuisionBOs;
@@ -48,7 +49,7 @@ namespace BusinessLogic
         {
             CuisineBO cuisionBO = new CuisineBO();
 
-            string sqlQuery = "SELECT * FROM Restaurant.Cuisine WHERE CuisineID="+cuisineID;
+            string sqlQuery = "SELECT CS.CuisineID,CS.RestaurantID,CS.CuisineName,RS.RestaurantName FROM Restaurant.Cuisine AS CS INNER JOIN Restaurant.Restaurant AS RS ON CS.RestaurantID=RS.RestaurantID WHERE CS.CuisineID=" + cuisineID;
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
@@ -62,6 +63,7 @@ namespace BusinessLogic
                          {
                              CuisineID = Convert.ToInt32(dataRow["CuisineID"]),
                              RestaurantID = Convert.ToInt32(dataRow["RestaurantID"]),
+                             RestaurantName = Convert.ToString(dataRow["RestaurantName"]),
                              CuisineName = Convert.ToString(dataRow["CuisineName"])
                          }).Single();
             return cuisionBO;

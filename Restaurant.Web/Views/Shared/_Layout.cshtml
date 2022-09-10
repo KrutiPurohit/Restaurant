@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required:false)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -23,7 +23,7 @@
 
 
                 <img src="../images/icon.png" width="40" height="40" class="d-inline-block align-top" alt="">
-               <h4 style="color:white" class="mr-5">Restaurant</h4>
+                <h4 style="color:white" class="mr-5">Restaurant</h4>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,15 +34,11 @@
                         <li class="nav-item active">
                             @Html.ActionLink("Home", "Index", new { Controller = "Home" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="allpies.html">Restaurant</a>
-                                <a class="dropdown-item" href="allpies.html">Cuisine</a>
-                            </div>
+                        <li class="nav-item active">
+                            <a class = "nav-link"> Restaurant</a>
+                         </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Cuisine", "Cuisine", new { Controller = "Cuisine" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Order", "Order", new { Controller = "Home" }, htmlAttributes: new { @class = "nav-link" })
@@ -54,7 +50,7 @@
                             <a class="nav-link" href="bill.html">Dinig Table Track</a>
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Customer", "Customer",new {Controller="Customer" }, htmlAttributes: new { @class = "nav-link" })
+                            @Html.ActionLink("Customer", "Customer", new { Controller = "Customer" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="bill.html">Report</a>
@@ -65,7 +61,7 @@
         </nav>
     </header>
 
-  
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -80,6 +76,7 @@
         </footer>
     </div>
 
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </body>
 </html>

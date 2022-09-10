@@ -53,10 +53,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
-        public HttpResponseMessage DeleteCuisine([FromBody] CuisineBO cuisineBO)
+        public HttpResponseMessage DeleteCuisine([FromUri]int cuisineID)
         {
             CuisineBL cuisineBL = new CuisineBL();
-         
+            CuisineBO cuisineBO = new CuisineBO();
+            cuisineBO.CuisineID = cuisineID;
+            cuisineBO.RestaurantID = 0;
+            cuisineBO.CuisineName = "";
              if (cuisineBL.DeleteCuisine(cuisineBO))
                 return Request.CreateResponse(HttpStatusCode.OK, "Cuisine is successfully deleted.");
             else

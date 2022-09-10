@@ -1,7 +1,53 @@
-﻿
+﻿@model IEnumerable<BusinessObjects.CuisineBO>
 @{
-    ViewBag.Title = "Cuisine";
+    ViewBag.Title = "Cuisine Details";
 }
 
-<h2>Cuisine</h2>
+<div class="container mt-3">
+
+    <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+        <h1 class="display-4">Cuisine Details</h1>
+    </div>
+    <table style="width:100%" class="table table-bordered table-dark table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Cuisine ID
+                </th>
+                <th>
+                    Cuisine
+                </th>
+                <th>
+                    Restaurant
+                </th>
+                <th colspan="2" style="text-align:center">
+                    Action Type
+                </th>
+            </tr>
+        </thead>
+   @foreach(var cuisine in Model)
+    {
+    <tr>
+        <td>
+            @cuisine.CuisineID
+        </td>
+        <td>
+            @cuisine.CuisineName
+        </td>
+        <td>
+            @cuisine.RestaurantName
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "CuisineEdit", "Cuisine", new { cuisineID = cuisine.CuisineID },new { @class = "nav-link rm-2" })
+          </td>
+        <td>
+            @Html.ActionLink("Delete", "CuisineDelete", "Cuisine", new { cuisineID = cuisine.CuisineID }, new { @class = "nav-link" })
+
+        </td>
+    </tr>
+
+    }
+    </table>
+</div>
+
 
