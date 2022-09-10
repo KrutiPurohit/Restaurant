@@ -200,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillsBL.cs" />
+    <Compile Include="CuisineBL.cs" />
     <Compile Include="CustomerBL.cs" />
     <Compile Include="DiningTableBL.cs" />
     <Compile Include="DiningTableTrackBL.cs" />

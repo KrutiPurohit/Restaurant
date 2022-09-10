@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="BillsBO.cs" />
     <Compile Include="Common\CurrentDateAttribute.cs" />
+    <Compile Include="CuisineBO.cs" />
     <Compile Include="CustomBO.cs" />
     <Compile Include="CustomerBO.cs" />
     <Compile Include="OrderBO.cs" />
