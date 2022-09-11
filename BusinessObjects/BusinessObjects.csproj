@@ -71,6 +71,7 @@
     <Compile Include="CuisineBO.cs" />
     <Compile Include="CustomBO.cs" />
     <Compile Include="CustomerBO.cs" />
+    <Compile Include="DiningTableTrackBO.cs" />
     <Compile Include="OrderBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantBO.cs" />

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BusinessObjects.DiningTableTrackBO>
+@{
+    ViewBag.Title = "DiningTableTrack";
+}
+
+<div class="container mt-3">
+
+    <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+        <h1 class="display-4">Restaurant Details</h1>
+    </div>
+    <table style="width:100%" class="table table-bordered table-dark table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Restaurant Name
+                </th>
+                <th>
+                   Dining Table Location
+                </th>
+                <th>
+                    Dining Table Status
+                </th>
+            </tr>
+        </thead>
+        @foreach (var table in Model)
+        {
+            <tr>
+                <td>
+                    @table.RestaurantName
+                </td>
+                <td>
+                    @table.Location
+                </td>
+                <td>
+                    @table.TableStatus
+                </td>
+
+            </tr>
+
+        }
+    </table>
+</div>

@@ -19,6 +19,36 @@ namespace BusinessLogic
         {
             return new RestaurantDAL().GetAllRestaurntNames();
         }
+
+        public List<RestaurantBO> GetAllRestaurants()
+        {
+            List<RestaurantBO> restaurants = new List<RestaurantBO>();
+            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                string sqlQuery = "SELECT * FROM  Restaurant.Restaurant";
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                DataTable dataTable = new DataTable();
+
+                sqlConnection.Open();
+                sqlDataAdapter.Fill(dataTable);
+                sqlConnection.Close();
+
+                restaurants= (from DataRow dataRow in dataTable.Rows
+                              select new RestaurantBO()
+                              {
+
+                                  RestaurantID = Convert.ToInt32(dataRow["RestaurantID"]),
+                                  RestaurantName = Convert.ToString(dataRow["RestaurantName"]),
+                                  Address = Convert.ToString(dataRow["Address"]),
+                                  MobileNo = Convert.ToString(dataRow["MobileNo"])
+
+                              }).ToList();
+                return restaurants;
+            }
+
+        }
         public bool AddRestaurant(RestaurantBO restaurantBO)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;

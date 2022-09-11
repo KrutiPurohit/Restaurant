@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic;
+using BusinessObjects;
 
 namespace Restaurant.Web.Controllers
 {
@@ -13,7 +15,11 @@ namespace Restaurant.Web.Controllers
         {
             //throw new HttpException(404,"Page Not Found");
             //throw new ArithmeticException();
-            return View();
+            RestaurantBL restaurantBL = new RestaurantBL();
+            List<RestaurantBO> restaurantBos = new List<RestaurantBO>();
+            restaurantBos = restaurantBL.GetAllRestaurants();
+
+            return View(restaurantBos);
         }
     }
 }
