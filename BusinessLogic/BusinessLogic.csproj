@@ -208,6 +208,8 @@
     <Compile Include="MenuItemBL.cs" />
     <Compile Include="OrderBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportBL.cs" />
+    <Compile Include="ReportFilterBO.cs" />
     <Compile Include="RestaurantBL.cs" />
   </ItemGroup>
   <ItemGroup>

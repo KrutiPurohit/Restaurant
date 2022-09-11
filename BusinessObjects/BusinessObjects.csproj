@@ -74,6 +74,7 @@
     <Compile Include="DiningTableTrackBO.cs" />
     <Compile Include="OrderBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportBo.cs" />
     <Compile Include="RestaurantBO.cs" />
   </ItemGroup>
   <ItemGroup>

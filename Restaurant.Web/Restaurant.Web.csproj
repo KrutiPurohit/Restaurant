@@ -129,6 +129,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DiningTableTrackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="CustomFilters\CustomException.cs" />
     <Compile Include="Global.asax.cs">
@@ -186,6 +187,7 @@
     <Content Include="Views\Shared\CError.cshtml" />
     <Content Include="Views\Restaurant\Restaurant.cshtml" />
     <Content Include="Views\DiningTableTrack\DiningTableTrack.cshtml" />
+    <Content Include="Views\Report\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

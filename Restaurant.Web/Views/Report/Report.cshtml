@@ -1,0 +1,86 @@
+﻿@model BusinessObjects.ReportBo
+@{
+    ViewBag.Title = "Report";
+}
+
+<script type="text/javascript" language="jscript">
+    $(document).ready(function () {
+        $('#search').click(function () {
+            finalSubmit();
+        });
+    });
+    function finalSubmit() {
+        var column = $('#Columns').val();
+        $('#column').val(column);
+
+        var operator = $('#operators').val();
+        $('#operator').val(operator);
+
+        var orderbycolumn = $('#OrderByColumns').val();
+        $('#orderby').val(orderbycolumn);
+
+        var orderbytype = $('#types').val();
+        $('#type').val(orderbytype);
+
+    }
+</script>
+
+@using (Html.BeginForm("ReportShow", "Report", FormMethod.Post))
+{
+
+    <div class="container mt-3">
+
+        <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+            <h3 class="display-4">Report</h3>
+        </div>
+        <div class="col-md-6 offset-2 align-content-end mr-5 ">
+            <div class="row">
+                <div class="col-md-5 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.ColumnToFilter, new { @class = "control-label" })
+                    @Html.HiddenFor(Model => Model.ColumnToFilter, new { @class = "form-control" , @id="column"})
+                    @Html.DropDownList("Columns", Model.ColumnNames, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-3 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.Operator, new { @class = "control-label" })
+                    @Html.HiddenFor(Model => Model.Operator, new { @class = "form-control", @id = "operator" })
+                    <select class="form-control dropdown" id="operators" name="operators">
+                        <option value=">">></option>
+                        <option value="<"><</option>
+                        <option value=">=">>=</option>
+                        <option value="<="><=</option>
+                        <option value="=">=</option>
+                        <option value="!=">!=</option>
+                        <option value="LIKE">LIKE</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.FilterValue, new { @class = "control-label" })
+                    @Html.TextBoxFor(Model => Model.FilterValue, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.OrderByColumn, new { @class = "control-label" })
+                    @Html.HiddenFor(Model => Model.OrderByColumn, new { @class = "form-control" ,@id="orderby"})
+                    @Html.DropDownList("OrderByColumns", Model.ColumnNames, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4 mb-3 form-group">
+                    @Html.LabelFor(Model => Model.OrderByType, new { @class = "control-label" })
+                    @Html.HiddenFor(Model => Model.OrderByType, new { @class = "form-control", @id = "type" })
+                    <select class="form-control dropdown" id="types" name="type">
+                        <option value="ASC">ASCENDING</option>
+                        <option value="DESC">DESCENDING</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3 form-group">
+                    @Html.Label("Genearate", new { @class = "control-label" })
+                    <button class="btn btn-success btn-block mb-1" type="submit" value="search" name="Search" id="search">
+                        Report
+                    </button>
+                </div>
+            </div>
+        </div>
+</div>
+}
+
