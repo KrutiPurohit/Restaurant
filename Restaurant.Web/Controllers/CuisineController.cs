@@ -57,6 +57,15 @@ namespace Restaurant.Web.Controllers
             return View(cuisineBO);
         }
 
+        [HttpGet]
+        public ActionResult CuisineAdd()
+        {
+            RestaurantBL restaurantBL = new RestaurantBL();
+            CuisineBO cuisineBO = new CuisineBO();
+             cuisineBO.RestaurantNames = restaurantBL.GetRestaurantNames().ToList();
+            return View(cuisineBO);
+        }
+
         [HttpPost]
         public async Task<ActionResult> CuisineAdd(CuisineBO cuisineBO)
         {
@@ -73,7 +82,7 @@ namespace Restaurant.Web.Controllers
                     customMessage = JsonConvert.DeserializeObject<string>(cuisine);
                 }
             }
-            return View();
+            return RedirectToAction("Cuisine");
         }
 
         [HttpPost]
@@ -95,7 +104,7 @@ namespace Restaurant.Web.Controllers
             return RedirectToAction("Cuisine");
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult> CuisineDelete(CuisineBO cuisineBO)
         {
             string customMessage = string.Empty;
@@ -111,7 +120,7 @@ namespace Restaurant.Web.Controllers
                     customMessage = JsonConvert.DeserializeObject<string>(cuisine);
                 }
             }
-            return View();
+            return RedirectToAction("Cuisine");
         }
     }
 }

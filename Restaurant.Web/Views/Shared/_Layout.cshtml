@@ -35,8 +35,8 @@
                             @Html.ActionLink("Home", "Index", new { Controller = "Home" }, htmlAttributes: new { @class = "nav-link" })
                         </li>
                         <li class="nav-item active">
-                            <a class = "nav-link"> Restaurant</a>
-                         </li>
+                            @Html.ActionLink("Restaurant", "Restaurant", new { Controller = "Restaurant" }, htmlAttributes: new { @class = "nav-link" })
+                        </li>
                         <li class="nav-item">
                             @Html.ActionLink("Cuisine", "Cuisine", new { Controller = "Cuisine" }, htmlAttributes: new { @class = "nav-link" })
                         </li>

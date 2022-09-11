@@ -128,6 +128,8 @@
     <Compile Include="Controllers\CuisineController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RestaurantController.cs" />
+    <Compile Include="CustomFilters\CustomException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +181,9 @@
     <Content Include="Views\Bills\Bills.cshtml" />
     <Content Include="Views\Cuisine\Cuisine.cshtml" />
     <Content Include="Views\Cuisine\CuisineEdit.cshtml" />
+    <Content Include="Views\Cuisine\CuisineAdd.cshtml" />
+    <Content Include="Views\Shared\CError.cshtml" />
+    <Content Include="Views\Restaurant\Restaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

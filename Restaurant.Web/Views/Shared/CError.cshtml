@@ -1,0 +1,13 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = "CError";
+}
+
+<h2 class="mt-5">There is some Error</h2>
+
+<b>Controller     :  </b>@Model.ControllerName
+<br />
+<b>Action Method  :  </b>@Model.ActionName
+<br />
+<b>Message        :  </b>@Model.Exception.Message
+

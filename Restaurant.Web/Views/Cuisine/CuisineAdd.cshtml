@@ -1,10 +1,10 @@
 ﻿@model BusinessObjects.CuisineBO
 @{
-    ViewBag.Title = "Cuisine Edit";
+    ViewBag.Title = "Cuisine Add";
 }
 
 <script type="text/javascript" language="jscript">
-    $(document).ready(function () {  
+    $(document).ready(function () {
         $('#save').click(function () {
             finalSubmit();
         });
@@ -15,20 +15,20 @@
     }
 </script>
 
-@using (Html.BeginForm("CuisineUpdate", "Cuisine", FormMethod.Post))
+@using (Html.BeginForm("CuisineAdd", "Cuisine", FormMethod.Post))
 {
     <div class="container mt-3">
 
         <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
-            <h1 class="display-4">Cuisine [Update]</h1>
+            <h1 class="display-4">Cuisine [Add]</h1>
         </div>
         <div class="col-md-6 offset-2 align-content-end mr-5 ">
             <div class="row">
                 <div class="col-md-12 mb-3 form-group">
-                    @Html.HiddenFor(Model => Model.CuisineID)
+                  
                     @Html.LabelFor(Model => Model.RestaurantID, new { @class = "control-label" })
                     @Html.TextBoxFor(Model => Model.RestaurantID, new { @type = "hidden", id = "txtResturantID", @class = "form-control" })
-                    @Html.DropDownListFor(Model=>Model.RestaurantID, Model.RestaurantNames, new { @class = "form-control",id="Restaurants" })
+                    @Html.DropDownListFor(Model => Model.RestaurantID, Model.RestaurantNames, new { @class = "form-control", id = "Restaurants" })
                     @Html.ValidationMessageFor(Model => Model.RestaurantNames, null, new { @class = "text-danger" })
                 </div>
             </div>
@@ -43,8 +43,10 @@
             </div>
 
             <button class="btn btn-success btn-lg btn-block mb-4" type="submit" value="save" name="save" id="save">
-                Update Cuisine
+                Add Cuisine
             </button>
         </div>
     </div>
 }
+
+
