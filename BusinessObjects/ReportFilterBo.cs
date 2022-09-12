@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic
+namespace BusinessObjects
 {
-    public class ReportFilterBO
+    public class ReportFilterBo
     {
         public string CustomerName { get; set; }
         public string OrderDate { get; set; }

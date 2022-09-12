@@ -10,12 +10,13 @@ using System.Data;
 using System.Configuration;
 using System.Web.Mvc;
 
+
 namespace BusinessLogic
 {
     public class ReportBL
     {
         private readonly SqlConnection sqlConnection;
-        private readonly string commandText = "USP_Dynamic_GetAllCustomerOrderDetails";
+        private readonly string commandText = "Restaurant.USP_Dynamic_GetAllCustomerOrderDetails";
 
         public ReportBL()
         {
@@ -60,15 +61,21 @@ namespace BusinessLogic
             return selectListItems;
         }
 
-        public List<ReportFilterBO> GetAllFilteredRecords(ReportBo reportBo)
+        public List<ReportFilterBo> GetAllFilteredRecords(ReportBo reportBo)
         {
             string filterBy = string.Empty;
             string orderBy = string.Empty;
 
+            if (reportBo.ColumnToFilter == "CS.CustomerName" || reportBo.ColumnToFilter == "RS.RestaurantName" || reportBo.ColumnToFilter == "DT.Location")
+                filterBy = reportBo.ColumnToFilter +" "+ reportBo.Operator +"  '%"+ reportBo.FilterValue+"%'  ";
+            else if (reportBo.ColumnToFilter == "ODR.OrderDate")
+                filterBy = reportBo.ColumnToFilter + " " +reportBo.Operator + "  '" + Convert.ToDateTime(reportBo.FilterValue).ToString("yyy-MM-dd") + "'  ";
+            else 
+                filterBy = reportBo.ColumnToFilter + reportBo.Operator + reportBo.FilterValue;
 
+            orderBy = reportBo.OrderByColumn + " " + reportBo.OrderByType;
 
-
-            List<ReportFilterBO> reportFilterBOs = new List<ReportFilterBO>();
+            List<ReportFilterBo> reportFilterBOs = new List<ReportFilterBo>();
 
             SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -83,13 +90,13 @@ namespace BusinessLogic
 
 
             reportFilterBOs = (from DataRow dataRow in dataTable.Rows
-                               select new ReportFilterBO()
+                               select new ReportFilterBo()
                                {
                                    CustomerName = Convert.ToString(dataRow["CustomerName"]),
-                                   Location = Convert.ToString(dataRow["Location"]),
+                                   Location = Convert.ToString(dataRow["Dining Table"]),
                                    RestaurantName = Convert.ToString(dataRow["RestaurantName"]),
                                    OrderAmount = Convert.ToString(dataRow["OrderAmount"]),
-                                   OrderDate = Convert.ToDateTime(dataRow["OrderDate"]).ToShortDateString()
+                                   OrderDate = Convert.ToDateTime(dataRow["Order Date"]).ToShortDateString()
                                }).ToList();
             return reportFilterBOs;
         }
