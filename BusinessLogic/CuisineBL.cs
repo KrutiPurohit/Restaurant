@@ -47,8 +47,9 @@ namespace BusinessLogic
         }
         public CuisineBO GetCuisineByID(int cuisineID)
         {
+     
             CuisineBO cuisionBO = new CuisineBO();
-
+           
             string sqlQuery = "SELECT CS.CuisineID,CS.RestaurantID,CS.CuisineName,RS.RestaurantName FROM Restaurant.Cuisine AS CS INNER JOIN Restaurant.Restaurant AS RS ON CS.RestaurantID=RS.RestaurantID WHERE CS.CuisineID=" + cuisineID;
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);

@@ -13,8 +13,11 @@ namespace BusinessLogic
 {
     public class BillsBL
     {
-        public void AddBill(BillsBO billsBO)
+        public bool AddBill(BillsBO billsBO)
         {
+            int result = 0;
+            if ( billsBO!=null)
+            { 
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -25,10 +28,14 @@ namespace BusinessLogic
                 sqlCommand.Parameters.AddWithValue("@OrderID", billsBO.OrderID);
                 sqlCommand.Parameters.AddWithValue("@CustomerID",billsBO.CustomerID);
                 sqlCommand.Parameters.AddWithValue("@ActionType", ActionType.INSERT);
-                sqlCommand.ExecuteNonQuery();
+                result = sqlCommand.ExecuteNonQuery();
             }
 
-
+            }
+            if (result > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

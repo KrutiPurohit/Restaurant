@@ -83,6 +83,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\BillsBLTest.cs" />
+    <Compile Include="BusinessLogic\CuisineBLTest.cs" />
+    <Compile Include="BusinessLogic\CustomerBLTest.cs" />
+    <Compile Include="BusinessLogic\DiningTableBLTest.cs" />
+    <Compile Include="BusinessLogic\DiningTableTrackBLTest.cs" />
+    <Compile Include="BusinessLogic\MenuItemBLTest.cs" />
+    <Compile Include="BusinessLogic\OrderBLTest.cs" />
+    <Compile Include="BusinessLogic\ReportBLTest.cs" />
+    <Compile Include="BusinessLogic\RestaurantBLTest.cs" />
     <Compile Include="Controller\BillsControllerTest.cs" />
     <Compile Include="Controller\CuisineControllerTest.cs" />
     <Compile Include="Controller\CustomerControllerTest.cs" />
