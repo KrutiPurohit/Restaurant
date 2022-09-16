@@ -37,5 +37,38 @@ namespace BusinessLogic
             else
                 return false;
         }
+        public BillSummaryBO GetBillSummary(int orderID)
+        {
+            BillSummaryBO billSummaryBO = new BillSummaryBO();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+            string sqlSummary = "SELECT BL.OrderID,RS.RestaurantName,CS.CustomerName,MI.ItemName,MI.ItemPrice,OD.ItemQuantity,OD.OrderAmount,OD.OrderDate, BL.BillsAmount FROM Restaurant.Bills AS BL INNER JOIN Restaurant.Restaurant AS RS ON BL.RestaurantID = RS.RestaurantID INNER JOIN Restaurant.Customer AS CS ON BL.CustomerID = CS.CustomerID INNER JOIN Restaurant.[Order] AS OD ON BL.OrderID = OD.OrderID INNER JOIN Restaurant.RestaurantMenuItem AS MI ON OD.MenuItemID = MI.MenuItemID WHERE BL.OrderID=" + orderID;
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(sqlSummary, sqlConnection);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                DataTable dataTable = new DataTable();
+
+                sqlConnection.Open();
+                sqlDataAdapter.Fill(dataTable);
+                sqlConnection.Close();
+
+                billSummaryBO = (from DataRow dataRow in dataTable.Rows
+                               select new BillSummaryBO()
+                               {
+
+                                   OrderID = Convert.ToString(dataRow["OrderID"]),
+                                   RestaurantName= Convert.ToString(dataRow["RestaurantName"]),
+                                   CustomerName = Convert.ToString(dataRow["CustomerName"]),
+                                   ItemName = Convert.ToString(dataRow["ItemName"]),
+                                   ItemPrice = Convert.ToString(dataRow["ItemPrice"]),
+                                   ItemQuantity = Convert.ToString(dataRow["ItemQuantity"]),
+                                   OrderAmount = Convert.ToString(dataRow["OrderAmount"]),
+                                   BillAmount= Convert.ToString(dataRow["BillsAmount"]),
+                                   OrderDate = Convert.ToString(dataRow["OrderDate"])
+                               }).ToList().First();
+                return billSummaryBO;
+            }
+        }
     }
 }

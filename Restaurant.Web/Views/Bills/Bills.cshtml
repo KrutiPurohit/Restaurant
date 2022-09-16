@@ -55,9 +55,80 @@
             Generate Bill
         </button>
     </div>
+    <div class="col-md-6 offset-2 align-content-end mr-5">
+        @if (TempData["OrderID"] != null)
+        {
+            <div class="p-2 pt-md-4 pb-md-3 mx-auto text-center">
+                <h4 class="h4">Bill Summary</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Order Number
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["OrderID"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Order Date
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["OrderDate"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Restaurant
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["RestaurantName"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Customer
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["CustomerName"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Item Name
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["ItemName"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Item Qty.
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["ItemQuantity"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 form-group">
+                    Item Price
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                    @TempData["ItemPrice"]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-10 form-group">
+                    Bill Amount
+                </div>
+                <div class="col-md-6 mb-10 form-group">
+                    @TempData["BillAmount"]
+                </div>
+            </div>
+
+        }
+    </div>
+ </div>
 
 
-</div>
-
-
-}
+    }
